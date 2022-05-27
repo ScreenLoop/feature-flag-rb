@@ -1,0 +1,75 @@
+require:
+  - rubocop-rspec
+  - rubocop-sorbet
+
+AllCops:
+  NewCops: enable
+  TargetRubyVersion: 2.6
+  DisplayCopNames: true
+  Exclude:
+    - 'bin/**/*'
+    - 'config/**/*'
+    - 'db/**/*'
+    - 'Gemfile*'
+    - 'script/**/*'
+    - 'vendor/**/*'
+
+Layout/ParameterAlignment:
+  EnforcedStyle: with_fixed_indentation
+Layout/ArgumentAlignment:
+  EnforcedStyle: with_fixed_indentation
+Layout/FirstArgumentIndentation:
+  EnforcedStyle: consistent
+Layout/FirstArrayElementIndentation:
+  EnforcedStyle: consistent
+Layout/FirstHashElementIndentation:
+  EnforcedStyle: consistent
+Layout/LineLength:
+  Enabled: true
+  Max: 120
+  IgnoredPatterns: ['\A#']
+Layout/MultilineMethodCallIndentation:
+  EnforcedStyle: indented
+Layout/MultilineOperationIndentation:
+  EnforcedStyle: indented
+Lint/ConstantDefinitionInBlock:
+  AllowedMethods:
+    - enums
+Metrics/ClassLength:
+  Max: 120
+Metrics/MethodLength:
+  Max: 20
+Metrics/ParameterLists:
+  Max: 10
+Naming/InclusiveLanguage:
+  Enabled: false
+RSpec/MessageChain:
+  Enabled: true
+  Exclude:
+    - 'spec/**/*'
+RSpec/AnyInstance:
+  Enabled: true
+RSpec/ExampleLength:
+  Enabled: false
+RSpec/MultipleExpectations:
+  Enabled: true
+RSpec/MultipleMemoizedHelpers:
+  Max: 50
+RSpec/NestedGroups:
+  Enabled: false
+Sorbet/FalseSigil:
+  Enabled: false
+Style/AccessorGrouping:
+  Enabled: false
+Style/Documentation:
+  Enabled: false
+Style/SymbolArray:
+  EnforcedStyle: brackets
+Style/TrailingCommaInArguments:
+  EnforcedStyleForMultiline: comma
+Style/TrailingCommaInArrayLiteral:
+  EnforcedStyleForMultiline: comma
+Style/TrailingCommaInHashLiteral:
+  EnforcedStyleForMultiline: comma
+Gemspec/RequireMFA:
+  Enabled: false
