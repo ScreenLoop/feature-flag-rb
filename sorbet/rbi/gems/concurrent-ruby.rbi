@@ -50,6 +50,37 @@ module Concurrent
   extend Concurrent::Utility::EngineDetector
   extend Concurrent::Utility::NativeExtensionLoader
 end
+class Concurrent::Error < StandardError
+end
+class Concurrent::ConfigurationError < Concurrent::Error
+end
+class Concurrent::CancelledOperationError < Concurrent::Error
+end
+class Concurrent::LifecycleError < Concurrent::Error
+end
+class Concurrent::ImmutabilityError < Concurrent::Error
+end
+class Concurrent::IllegalOperationError < Concurrent::Error
+end
+class Concurrent::InitializationError < Concurrent::Error
+end
+class Concurrent::MaxRestartFrequencyError < Concurrent::Error
+end
+class Concurrent::MultipleAssignmentError < Concurrent::Error
+  def initialize(message = nil, inspection_data = nil); end
+  def inspect; end
+  def inspection_data; end
+end
+class Concurrent::RejectedExecutionError < Concurrent::Error
+end
+class Concurrent::ResourceLimitError < Concurrent::Error
+end
+class Concurrent::TimeoutError < Concurrent::Error
+end
+class Concurrent::MultipleErrors < Concurrent::Error
+  def errors; end
+  def initialize(errors, message = nil); end
+end
 module Concurrent::Utility
 end
 module Concurrent::Utility::EngineDetector
@@ -190,113 +221,6 @@ class Concurrent::Synchronization::Lock < Concurrent::Synchronization::LockableO
   def synchronize; end
   def wait(timeout = nil); end
   def wait_until(timeout = nil, &condition); end
-end
-module Concurrent::Collection
-end
-class Concurrent::Collection::NonConcurrentMapBackend
-  def [](key); end
-  def []=(key, value); end
-  def _get(key); end
-  def _set(key, value); end
-  def clear; end
-  def compute(key); end
-  def compute_if_absent(key); end
-  def compute_if_present(key); end
-  def delete(key); end
-  def delete_pair(key, value); end
-  def dupped_backend; end
-  def each_pair; end
-  def get_and_set(key, value); end
-  def get_or_default(key, default_value); end
-  def initialize(options = nil); end
-  def initialize_copy(other); end
-  def key?(key); end
-  def merge_pair(key, value); end
-  def pair?(key, expected_value); end
-  def replace_if_exists(key, new_value); end
-  def replace_pair(key, old_value, new_value); end
-  def size; end
-  def store_computed_value(key, new_value); end
-end
-class Concurrent::Collection::MriMapBackend < Concurrent::Collection::NonConcurrentMapBackend
-  def []=(key, value); end
-  def clear; end
-  def compute(key); end
-  def compute_if_absent(key); end
-  def compute_if_present(key); end
-  def delete(key); end
-  def delete_pair(key, value); end
-  def get_and_set(key, value); end
-  def initialize(options = nil); end
-  def merge_pair(key, value); end
-  def replace_if_exists(key, new_value); end
-  def replace_pair(key, old_value, new_value); end
-end
-class Concurrent::Map < Concurrent::Collection::MriMapBackend
-  def [](key); end
-  def []=(key, value); end
-  def each; end
-  def each_key; end
-  def each_pair; end
-  def each_value; end
-  def empty?; end
-  def fetch(key, default_value = nil); end
-  def fetch_or_store(key, default_value = nil); end
-  def get(key); end
-  def initialize(options = nil, &block); end
-  def initialize_copy(other); end
-  def inspect; end
-  def key(value); end
-  def keys; end
-  def marshal_dump; end
-  def marshal_load(hash); end
-  def populate_from(hash); end
-  def put(key, value); end
-  def put_if_absent(key, value); end
-  def raise_fetch_no_key; end
-  def validate_options_hash!(options); end
-  def value?(value); end
-  def values; end
-end
-module Concurrent::ThreadSafe
-end
-module Concurrent::ThreadSafe::Util
-  def self.make_synchronized_on_cruby(klass); end
-  def self.make_synchronized_on_rbx(klass); end
-  def self.make_synchronized_on_truffleruby(klass); end
-end
-class Concurrent::Hash < Hash
-end
-class Concurrent::Error < StandardError
-end
-class Concurrent::ConfigurationError < Concurrent::Error
-end
-class Concurrent::CancelledOperationError < Concurrent::Error
-end
-class Concurrent::LifecycleError < Concurrent::Error
-end
-class Concurrent::ImmutabilityError < Concurrent::Error
-end
-class Concurrent::IllegalOperationError < Concurrent::Error
-end
-class Concurrent::InitializationError < Concurrent::Error
-end
-class Concurrent::MaxRestartFrequencyError < Concurrent::Error
-end
-class Concurrent::MultipleAssignmentError < Concurrent::Error
-  def initialize(message = nil, inspection_data = nil); end
-  def inspect; end
-  def inspection_data; end
-end
-class Concurrent::RejectedExecutionError < Concurrent::Error
-end
-class Concurrent::ResourceLimitError < Concurrent::Error
-end
-class Concurrent::TimeoutError < Concurrent::Error
-end
-class Concurrent::MultipleErrors < Concurrent::Error
-  def errors; end
-  def initialize(errors, message = nil); end
 end
 class Concurrent::Event < Concurrent::Synchronization::LockableObject
   def initialize; end
@@ -705,6 +629,8 @@ class Concurrent::SerializedExecutionDelegator < SimpleDelegator
 end
 class Concurrent::SingleThreadExecutor < Concurrent::RubySingleThreadExecutor
 end
+module Concurrent::Collection
+end
 class Concurrent::Collection::CopyOnWriteObserverSet < Concurrent::Synchronization::LockableObject
   def add_observer(observer = nil, func = nil, &block); end
   def clear_observers_and_return_old; end
@@ -918,7 +844,16 @@ class Concurrent::Atom < Concurrent::Synchronization::Object
   def value=(value); end
   include Concurrent::Concern::Observable
 end
+module Concurrent::ThreadSafe
+end
+module Concurrent::ThreadSafe::Util
+  def self.make_synchronized_on_cruby(klass); end
+  def self.make_synchronized_on_rbx(klass); end
+  def self.make_synchronized_on_truffleruby(klass); end
+end
 class Concurrent::Array < Array
+end
+class Concurrent::Hash < Hash
 end
 class Concurrent::CRubySet < Set
   def &(*args); end
@@ -986,6 +921,71 @@ class Concurrent::CRubySet < Set
   def |(*args); end
 end
 class Concurrent::Set < Concurrent::CRubySet
+end
+class Concurrent::Collection::NonConcurrentMapBackend
+  def [](key); end
+  def []=(key, value); end
+  def _get(key); end
+  def _set(key, value); end
+  def clear; end
+  def compute(key); end
+  def compute_if_absent(key); end
+  def compute_if_present(key); end
+  def delete(key); end
+  def delete_pair(key, value); end
+  def dupped_backend; end
+  def each_pair; end
+  def get_and_set(key, value); end
+  def get_or_default(key, default_value); end
+  def initialize(options = nil); end
+  def initialize_copy(other); end
+  def key?(key); end
+  def merge_pair(key, value); end
+  def pair?(key, expected_value); end
+  def replace_if_exists(key, new_value); end
+  def replace_pair(key, old_value, new_value); end
+  def size; end
+  def store_computed_value(key, new_value); end
+end
+class Concurrent::Collection::MriMapBackend < Concurrent::Collection::NonConcurrentMapBackend
+  def []=(key, value); end
+  def clear; end
+  def compute(key); end
+  def compute_if_absent(key); end
+  def compute_if_present(key); end
+  def delete(key); end
+  def delete_pair(key, value); end
+  def get_and_set(key, value); end
+  def initialize(options = nil); end
+  def merge_pair(key, value); end
+  def replace_if_exists(key, new_value); end
+  def replace_pair(key, old_value, new_value); end
+end
+class Concurrent::Map < Concurrent::Collection::MriMapBackend
+  def [](key); end
+  def []=(key, value); end
+  def each; end
+  def each_key; end
+  def each_pair; end
+  def each_value; end
+  def empty?; end
+  def fetch(key, default_value = nil); end
+  def fetch_or_store(key, default_value = nil); end
+  def get(key); end
+  def initialize(options = nil, &block); end
+  def initialize_copy(other); end
+  def inspect; end
+  def key(value); end
+  def keys; end
+  def marshal_dump; end
+  def marshal_load(hash); end
+  def populate_from(hash); end
+  def put(key, value); end
+  def put_if_absent(key, value); end
+  def raise_fetch_no_key; end
+  def validate_options_hash!(options); end
+  def value?(value); end
+  def values; end
 end
 class Concurrent::Tuple
   def cas(i, old_value, new_value); end

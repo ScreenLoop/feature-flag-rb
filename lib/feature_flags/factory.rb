@@ -12,12 +12,17 @@ module FeatureFlags
       T::Hash[Symbol, T.class_of(Adapter)],
     )
 
-    sig { params(adapter_name: T.any(String, Symbol)).returns(Adapter) }
-    def self.build(adapter_name)
+    sig do
+      params(
+        adapter_name: T.any(String, Symbol),
+        credentials: Credentials,
+      ).returns(Adapter)
+    end
+    def self.build(adapter_name, credentials)
       adapter_class = ADAPTERS[adapter_name.to_sym]
       raise "Adapter #{adapter_name} is not supported." if adapter_class.nil?
 
-      adapter_class.new
+      adapter_class.new(credentials)
     end
   end
 end

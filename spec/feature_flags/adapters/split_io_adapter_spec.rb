@@ -1,7 +1,7 @@
 # typed: false
 # frozen_string_literal: true
 
-require 'rails_helper'
+require './lib/feature_flags'
 
 RSpec.describe FeatureFlags::Adapters::SplitIoAdapter do
   describe '#client' do
@@ -24,8 +24,8 @@ RSpec.describe FeatureFlags::Adapters::SplitIoAdapter do
 
     describe 'when adapter is instantiated multiple times' do
       before do
-        described_class.new(api_key: 'API_KEY').send(:client)
-        described_class.new(api_key: 'API_KEY').send(:client)
+        described_class.new(FeatureFlags::Credentials.new(api_key: 'API_KEY')).send(:client)
+        described_class.new(FeatureFlags::Credentials.new(api_key: 'API_KEY')).send(:client)
       end
 
       it 'the API client is built only once' do

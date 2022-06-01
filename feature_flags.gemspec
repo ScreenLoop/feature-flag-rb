@@ -5,8 +5,8 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'feature_flags/version'
 
 Gem::Specification.new do |spec|
-  spec.name        = 'feature_flag'
-  spec.version     = FeatureFlag::VERSION
+  spec.name        = 'feature_flags'
+  spec.version     = FeatureFlags::VERSION
   spec.authors     = ['Screenloop']
   spec.email       = ['engineering@screenloop.com']
   spec.homepage    = 'https://www.screenloop.com'
@@ -18,7 +18,16 @@ Gem::Specification.new do |spec|
 
   spec.files = `git ls-files`.split($OUTPUT_RECORD_SEPARATOR)
 
-  spec.required_ruby_version = '>= 2.6'
-  spec.add_dependency 'rails', '~> 6.1.3'
-  spec.add_dependency 'splitclient-rb', '~> 7.3'
+  spec.required_ruby_version = '~> 2.6.9'
+
+  spec.add_dependency 'sorbet-runtime'
+  spec.add_dependency 'sorbet-struct-comparable'
+  spec.add_dependency 'splitclient-rb', '~> 8.0'
+
+  spec.add_development_dependency 'byebug'
+  spec.add_development_dependency 'rspec'
+  spec.add_development_dependency 'rubocop'
+  spec.add_development_dependency 'rubocop-rspec'
+  spec.add_development_dependency 'rubocop-sorbet'
+  spec.add_development_dependency 'sorbet'
 end
