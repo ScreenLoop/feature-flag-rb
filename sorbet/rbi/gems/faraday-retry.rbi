@@ -25,7 +25,7 @@ class Faraday::Retry::Middleware < Faraday::Middleware
   def retry_request?(env, exception); end
   def rewind_files(body); end
 end
-class Anonymous_Faraday_Options_15 < Faraday::Options
+class Anonymous_Faraday_Options_7 < Faraday::Options
   def backoff_factor; end
   def backoff_factor=(_); end
   def exceptions; end
@@ -51,7 +51,7 @@ class Anonymous_Faraday_Options_15 < Faraday::Options
   def self.members; end
   def self.new(*arg0); end
 end
-class Faraday::Retry::Middleware::Options < Anonymous_Faraday_Options_15
+class Faraday::Retry::Middleware::Options < Anonymous_Faraday_Options_7
   def backoff_factor; end
   def exceptions; end
   def interval; end

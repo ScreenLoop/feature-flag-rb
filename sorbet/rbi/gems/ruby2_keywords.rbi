@@ -15,3 +15,7 @@ end
 class Proc
   def ruby2_keywords; end
 end
+class Hash
+  def self.ruby2_keywords_hash?(hash); end
+  def self.try_convert(arg0); end
+end

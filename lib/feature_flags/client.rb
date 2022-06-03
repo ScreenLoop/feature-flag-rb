@@ -21,7 +21,7 @@ module FeatureFlags
     end
 
     sig { params(adapter: Adapter).void }
-    def initialize(adapter: Factory.build(T.must(Client.config.adapter)))
+    def initialize(adapter: Factory.build(T.must(Client.config.adapter), T.must(Client.config.credentials)))
       @adapter = adapter
     end
 
