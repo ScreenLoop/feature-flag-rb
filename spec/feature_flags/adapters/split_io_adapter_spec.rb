@@ -1,7 +1,7 @@
 # typed: false
 # frozen_string_literal: true
 
-require './lib/feature_flags'
+require 'spec_helper'
 
 RSpec.describe FeatureFlags::Adapters::SplitIoAdapter do
   describe '#client' do
