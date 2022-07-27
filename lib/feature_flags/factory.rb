@@ -7,8 +7,8 @@ module FeatureFlags
 
     ADAPTERS = T.let(
       {
-        split_io: Adapters::SplitIoAdapter,
-        null: Adapters::NullAdapter,
+        split_io_adapter: Adapters::SplitIoAdapter,
+        true_adapter: Adapters::TrueAdapter,
       },
       T::Hash[Symbol, T.class_of(Adapter)],
     )

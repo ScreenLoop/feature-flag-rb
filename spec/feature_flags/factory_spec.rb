@@ -22,10 +22,10 @@ RSpec.describe FeatureFlags::Factory do
     describe 'given valid adapter names' do
       using RSpec::Parameterized::TableSyntax
       where(:adapter_name, :expected_adapter) do
-        'null'      | ::FeatureFlags::Adapters::NullAdapter
-        :null       | ::FeatureFlags::Adapters::NullAdapter
-        'split_io'  | ::FeatureFlags::Adapters::SplitIoAdapter
-        :split_io   | ::FeatureFlags::Adapters::SplitIoAdapter
+        'true_adapter'      | ::FeatureFlags::Adapters::TrueAdapter
+        :true_adapter       | ::FeatureFlags::Adapters::TrueAdapter
+        'split_io_adapter'  | ::FeatureFlags::Adapters::SplitIoAdapter
+        :split_io_adapter   | ::FeatureFlags::Adapters::SplitIoAdapter
       end
 
       with_them do

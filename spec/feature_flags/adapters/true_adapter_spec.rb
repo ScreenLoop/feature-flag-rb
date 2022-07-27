@@ -3,8 +3,8 @@
 
 require 'spec_helper'
 
-RSpec.describe FeatureFlags::Adapters::NullAdapter do
-  subject(:random_adapter) { described_class.new(credentials) }
+RSpec.describe FeatureFlags::Adapters::TrueAdapter do
+  subject(:true_adapter) { described_class.new(credentials) }
 
   let(:credentials) { FeatureFlags::Credentials.new(api_key: 'API_KEY') }
 
@@ -17,7 +17,7 @@ RSpec.describe FeatureFlags::Adapters::NullAdapter do
     end
 
     it 'always returns true' do
-      expect(random_adapter.feature_account_enabled?(account_request)).to eq(true)
+      expect(true_adapter.feature_account_enabled?(account_request)).to eq(true)
     end
   end
 end
