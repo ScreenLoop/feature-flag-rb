@@ -35,6 +35,9 @@ Layout/MultilineOperationIndentation:
 Lint/ConstantDefinitionInBlock:
   AllowedMethods:
     - enums
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/**/*'
 Metrics/ClassLength:
   Max: 120
 Metrics/MethodLength:

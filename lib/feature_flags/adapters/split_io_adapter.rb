@@ -1,4 +1,4 @@
-# typed: false
+# typed: strict
 # frozen_string_literal: true
 
 module FeatureFlags
@@ -32,7 +32,7 @@ module FeatureFlags
         def client(credentials)
           @client ||= T.let(@client, T.nilable(::SplitIoClient::SplitClient))
 
-          if !credentials.api_key&.empty? && !@client
+          if !credentials.api_key.empty? && !@client
             @client ||= ::SplitIoClient::SplitFactoryBuilder.build(
               credentials.api_key,
               { block_until_ready: 10 },

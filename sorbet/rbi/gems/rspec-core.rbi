@@ -1484,7 +1484,10 @@ class RSpec::Core::Example::Procsy
   def skip(*a, &b); end
   def skipped?(*a, &b); end
   def source_location(*a, &b); end
+  def to_ast(*a, &b); end
   def to_proc; end
+  def to_raw_source(*a, &b); end
+  def to_source(*a, &b); end
   def update_inherited_metadata(*a, &b); end
   def wrap(&block); end
   def yield(*a, &b); end
@@ -1898,15 +1901,4 @@ class RSpec::Core::Formatters::FailureListFormatter < RSpec::Core::Formatters::B
   def dump_profile(_profile); end
   def example_failed(failure); end
   def message(_message); end
-end
-module RSpec::Core::MockingAdapters
-end
-module RSpec::Core::MockingAdapters::RSpec
-  def self.configuration; end
-  def self.framework_name; end
-  def setup_mocks_for_rspec; end
-  def teardown_mocks_for_rspec; end
-  def verify_mocks_for_rspec; end
-  include RSpec::Mocks::ExampleMethods
-  include RSpec::Mocks::ExampleMethods::ExpectHost
 end

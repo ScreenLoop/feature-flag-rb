@@ -1,8 +1,11 @@
+# typed: strict
 # frozen_string_literal: true
 
+require 'feature_flags'
 require 'sorbet-runtime'
+require 'rspec-parameterized'
 
-RSpec.configure do |_config|
+RSpec.configure do |_c|
   T::Configuration.inline_type_error_handler = lambda do |error|
     raise error unless error.message.include? 'got type RSpec::Mocks'
   end

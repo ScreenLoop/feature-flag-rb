@@ -195,3 +195,9 @@ class RuboCop::Cop::Sorbet::EnforceSigilOrder < RuboCop::Cop::Sorbet::ValidSigil
   def investigate(processed_source); end
   include RuboCop::Cop::RangeHelp
 end
+module FeatureFlags
+end
+class FeatureFlags::Factory
+  extend T::Sig
+  extend T::Sig
+end
