@@ -18,7 +18,7 @@ Gem::Specification.new do |spec|
 
   spec.files = `git ls-files`.split($OUTPUT_RECORD_SEPARATOR)
 
-  spec.required_ruby_version = '~> 2.6.9'
+  spec.required_ruby_version = '>= 2.6.9'
 
   spec.add_dependency 'sorbet-runtime'
   spec.add_dependency 'sorbet-struct-comparable'
