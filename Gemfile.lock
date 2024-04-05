@@ -120,6 +120,7 @@ PLATFORMS
 DEPENDENCIES
   byebug
   feature_flags!
+  json (= 2.6.2)
   rspec
   rspec-parameterized
   rubocop

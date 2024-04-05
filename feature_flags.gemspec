@@ -20,6 +20,7 @@ Gem::Specification.new do |spec|
 
   spec.required_ruby_version = '>= 2.6.9'
 
+  spec.add_dependency 'json', '2.6.2'
   spec.add_dependency 'sorbet-runtime'
   spec.add_dependency 'sorbet-struct-comparable'
   spec.add_dependency 'splitclient-rb', '~> 8.0'
