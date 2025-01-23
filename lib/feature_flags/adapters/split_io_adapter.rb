@@ -35,7 +35,7 @@ module FeatureFlags
           if !credentials.api_key.empty? && !@client
             @client ||= ::SplitIoClient::SplitFactoryBuilder.build(
               credentials.api_key,
-              { block_until_ready: 20 },
+              { block_until_ready: 10 },
             ).client
 
             begin
